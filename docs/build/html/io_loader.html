@@ -1,0 +1,527 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>io_loader module &mdash; A Mean Field Game of Shipping  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="io_plots module" href="io_plots.html" />
+    <link rel="prev" title="io_config module" href="io_config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            A Mean Field Game of Shipping
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="io_config.html">io_config module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">io_loader module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#io_loader.DataConfigurator"><code class="docutils literal notranslate"><span class="pre">DataConfigurator</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.dirs"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.dirs</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.all_content"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.all_content</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.countries_export"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.countries_export</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.countries_import"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.countries_import</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.data_export_to"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.data_export_to</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.data_import_in"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.data_import_in</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.export_to_countries"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.export_to_countries</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.import_in_countries"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.import_in_countries</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.concatenate_all"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.concatenate_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.concatenate_and_truncate_all"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.concatenate_and_truncate_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.define_import_export"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.define_import_export()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.export_on"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.export_on()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.load_all"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.load_all()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.DataConfigurator.reduce_exports"><code class="docutils literal notranslate"><span class="pre">DataConfigurator.reduce_exports()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#io_loader.FSCC"><code class="docutils literal notranslate"><span class="pre">FSCC</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#io_loader.FileContainer"><code class="docutils literal notranslate"><span class="pre">FileContainer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.FileContainer.content"><code class="docutils literal notranslate"><span class="pre">FileContainer.content</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">FileContainer.content</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.FileContainer.get"><code class="docutils literal notranslate"><span class="pre">FileContainer.get()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.FileContainer.iterate"><code class="docutils literal notranslate"><span class="pre">FileContainer.iterate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.FileContainer.pprint"><code class="docutils literal notranslate"><span class="pre">FileContainer.pprint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#io_loader.FileContainer.update"><code class="docutils literal notranslate"><span class="pre">FileContainer.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#io_loader.load_one_xls_dir"><code class="docutils literal notranslate"><span class="pre">load_one_xls_dir()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="io_plots.html">io_plots module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mfg_stats.html">mfg_stats module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">A Mean Field Game of Shipping</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">io_loader module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/io_loader.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-io_loader">
+<span id="io-loader-module"></span><h1>io_loader module<a class="headerlink" href="#module-io_loader" title="Link to this heading"></a></h1>
+<p>Import/Exports Loeading and formating Module</p>
+<p>This module provides functionality for loading
+maritime trade flows.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataConfigurator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'export_coal':</span> <span class="pre">'./data_in/shipfix/export_coal',</span> <span class="pre">'import_coal':</span> <span class="pre">'./data_in/shipfix/import_coal'}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.DataConfigurator" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Main class for configuring and processing maritime traffic data.</p>
+<p>This class handles loading, organizing, and preprocessing maritime trade data
+from multiple Excel files, specifically focusing on coal import/export patterns
+between different countries.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.dirs">
+<span class="sig-name descname"><span class="pre">dirs</span></span><a class="headerlink" href="#io_loader.DataConfigurator.dirs" title="Link to this definition"></a></dt>
+<dd><p>Dictionary mapping data type names to directory paths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.all_content">
+<span class="sig-name descname"><span class="pre">all_content</span></span><a class="headerlink" href="#io_loader.DataConfigurator.all_content" title="Link to this definition"></a></dt>
+<dd><p>List of all loaded file data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.countries_export">
+<span class="sig-name descname"><span class="pre">countries_export</span></span><a class="headerlink" href="#io_loader.DataConfigurator.countries_export" title="Link to this definition"></a></dt>
+<dd><p>Mapping of export countries to their filename patterns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.countries_import">
+<span class="sig-name descname"><span class="pre">countries_import</span></span><a class="headerlink" href="#io_loader.DataConfigurator.countries_import" title="Link to this definition"></a></dt>
+<dd><p>Mapping of import countries to their filename patterns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.data_export_to">
+<span class="sig-name descname"><span class="pre">data_export_to</span></span><a class="headerlink" href="#io_loader.DataConfigurator.data_export_to" title="Link to this definition"></a></dt>
+<dd><p>Processed export data by destination country.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.data_import_in">
+<span class="sig-name descname"><span class="pre">data_import_in</span></span><a class="headerlink" href="#io_loader.DataConfigurator.data_import_in" title="Link to this definition"></a></dt>
+<dd><p>Processed import data by source country.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.export_to_countries">
+<span class="sig-name descname"><span class="pre">export_to_countries</span></span><a class="headerlink" href="#io_loader.DataConfigurator.export_to_countries" title="Link to this definition"></a></dt>
+<dd><p>List of countries that export to others.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.import_in_countries">
+<span class="sig-name descname"><span class="pre">import_in_countries</span></span><a class="headerlink" href="#io_loader.DataConfigurator.import_in_countries" title="Link to this definition"></a></dt>
+<dd><p>List of countries that import from others.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.concatenate_all">
+<span class="sig-name descname"><span class="pre">concatenate_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.DataConfigurator.concatenate_all" title="Link to this definition"></a></dt>
+<dd><p>Combine all export data into a single time-series DataFrame.</p>
+<p>This method processes each exporting country’s data using reduce_exports()
+and concatenates them into a unified DataFrame with consistent time indexing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl>
+<dt>Combined time-series DataFrame with MultiIndex columns:</dt><dd><ul class="simple">
+<li><p>Level 0 (‘country_from’): Source countries</p></li>
+<li><p>Level 1 (‘country_to’): Destination countries</p></li>
+</ul>
+<p>Index is datetime representing the time series.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Uses inner join to ensure all countries have data for the same time periods.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.concatenate_and_truncate_all">
+<span class="sig-name descname"><span class="pre">concatenate_and_truncate_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.DataConfigurator.concatenate_and_truncate_all" title="Link to this definition"></a></dt>
+<dd><p>Create complete export-import matrix including ‘Others’ category.</p>
+<p>This method extends concatenate_all() by adding an ‘Others’ exporting
+category that represents the difference between total imports reported
+by importing countries and exports reported by tracked exporting countries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>Complete trade flow matrix with MultiIndex columns:</dt><dd><ul class="simple">
+<li><p>Level 0 (‘country_from’): All source countries including ‘Others’</p></li>
+<li><p>Level 1 (‘country_to’): All destination countries</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ‘Others’ category helps balance the trade flow accounting by
+capturing exports from countries not explicitly tracked in the dataset.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.define_import_export">
+<span class="sig-name descname"><span class="pre">define_import_export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">countries_export</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'Australia':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_Australia_to',</span> <span class="pre">'Indonesia':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_Indonesia_to',</span> <span class="pre">'Russia':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_Russia_to',</span> <span class="pre">'SAFR':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_SAFR_to',</span> <span class="pre">'US':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_US_to'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">countries_import</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'China':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_to_China',</span> <span class="pre">'India':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_to_India',</span> <span class="pre">'Japan':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_to_Japan',</span> <span class="pre">'South</span> <span class="pre">Korea':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_to_SK',</span> <span class="pre">'Vietnam':</span> <span class="pre">'all_voyage_orders_by_cargo_type_time_series_stacked_to_Vietnam'}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.DataConfigurator.define_import_export" title="Link to this definition"></a></dt>
+<dd><p>Define country mappings and organize import/export data.</p>
+<p>This method establishes the relationship between countries and their
+corresponding data files, then organizes the data for further processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>countries_export</strong> (<em>dict</em>) – Mapping of exporting countries to their
+corresponding filename patterns. Keys are country names, values
+are filename identifiers for files containing export data.</p></li>
+<li><p><strong>countries_import</strong> (<em>dict</em>) – Mapping of importing countries to their
+corresponding filename patterns. Keys are country names, values
+are filename identifiers for files containing import data.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires load_all() to be called first. Updates the FileContainer
+with loaded content and creates data structures for export and import
+analysis.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.export_on">
+<span class="sig-name descname"><span class="pre">export_on</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2021-03-10'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.DataConfigurator.export_on" title="Link to this definition"></a></dt>
+<dd><p>Extract and process export/import data for a specific date.</p>
+<p>This method is marked as deprecated and extracts trade flow data
+for a single day, creating balanced import/export matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>day</strong> (<em>str</em>) – Date in ‘YYYY-MM-DD’ format for data extraction.
+Defaults to ‘2021-03-10’.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Contains three elements:</dt><dd><ul class="simple">
+<li><p>pandas.DataFrame: Balanced export matrix with ‘Others’ category</p></li>
+<li><p>dict: Raw daily export data by destination country</p></li>
+<li><p>dict: Raw daily import data by source country</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method is deprecated. The ‘Others’ category represents
+aggregated data for countries not explicitly tracked.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.load_all">
+<span class="sig-name descname"><span class="pre">load_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.DataConfigurator.load_all" title="Link to this definition"></a></dt>
+<dd><p>Load all Excel files from configured directories.</p>
+<p>Iterates through all configured directories and loads Excel files,
+storing the combined results in self.all_content.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method must be called before other processing methods.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.DataConfigurator.reduce_exports">
+<span class="sig-name descname"><span class="pre">reduce_exports</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.DataConfigurator.reduce_exports" title="Link to this definition"></a></dt>
+<dd><p>Transform export data for a single country into time-indexed format.</p>
+<p>This method processes export data from one country to create a time-series
+DataFrame with MultiIndex columns showing destination countries. Countries
+not in the main import list are aggregated into an ‘Others’ category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>country</strong> (<em>str</em>) – Name of the exporting country.</p></li>
+<li><p><strong>df</strong> (<em>pandas.DataFrame</em>) – Raw export data with ‘Date’ column and
+destination countries as remaining columns.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl>
+<dt>Time-indexed DataFrame with MultiIndex columns:</dt><dd><ul class="simple">
+<li><p>Level 0: Source country (repeated for all destinations)</p></li>
+<li><p>Level 1: Destination countries (including ‘Others’)</p></li>
+</ul>
+<p>Index is datetime-converted from the original Date column.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.FSCC">
+<span class="sig-name descname"><span class="pre">FSCC</span></span><a class="headerlink" href="#io_loader.FSCC" title="Link to this definition"></a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">FSC</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="io_loader.FileContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FileContainer</span></span><a class="headerlink" href="#io_loader.FileContainer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container class for managing loaded file data.</p>
+<p>This class provides a centralized way to store and access file data
+loaded from Excel files containing maritime traffic information.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="io_loader.FileContainer.content">
+<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#io_loader.FileContainer.content" title="Link to this definition"></a></dt>
+<dd><p>Class-level list storing FSCC namedtuples with file data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">content</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.FileContainer.get">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.FileContainer.get" title="Link to this definition"></a></dt>
+<dd><p>Retrieve file data by name or get all file names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the file to retrieve. If None, returns
+all available file names.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>If name is None, returns list of all file names.</dt><dd><p>If name is provided, returns the corresponding FSCC object or None
+if not found.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list or FSCC or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.FileContainer.iterate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iterate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.FileContainer.iterate" title="Link to this definition"></a></dt>
+<dd><p>Iterator over all loaded files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>FSCC</em> – Each loaded file’s data structure.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.FileContainer.pprint">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pprint</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.FileContainer.pprint" title="Link to this definition"></a></dt>
+<dd><p>Pretty print all loaded files with their column information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Formatted string showing file names and their columns.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="io_loader.FileContainer.update">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.FileContainer.update" title="Link to this definition"></a></dt>
+<dd><p>Update the content with new file data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>content</strong> (<em>list</em>) – List of FSCC namedtuples to store as class content.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="io_loader.load_one_xls_dir">
+<span class="sig-name descname"><span class="pre">load_one_xls_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_loader.load_one_xls_dir" title="Link to this definition"></a></dt>
+<dd><p>Load all Excel files from a specified directory.</p>
+<p>This function reads all .xlsx files from a given directory and creates
+FSCC namedtuples containing file metadata and pandas DataFrame content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dir_name</strong> (<em>str</em>) – Path to the directory containing Excel files.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>List of FSCC namedtuples, each containing:</dt><dd><ul class="simple">
+<li><p>file: Full file path</p></li>
+<li><p>name: Base filename without extension</p></li>
+<li><p>shape: DataFrame shape tuple (rows, columns)</p></li>
+<li><p>columns: DataFrame column names</p></li>
+<li><p>content: pandas DataFrame with the file data</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Suppresses openpyxl UserWarnings about stylesheets to reduce noise
+during batch processing.</p>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="io_config.html" class="btn btn-neutral float-left" title="io_config module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="io_plots.html" class="btn btn-neutral float-right" title="io_plots module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Charles-Albert Lehalle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

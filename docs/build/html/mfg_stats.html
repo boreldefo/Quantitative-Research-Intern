@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mfg_stats module &mdash; A Mean Field Game of Shipping  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="io_plots module" href="io_plots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            A Mean Field Game of Shipping
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="io_config.html">io_config module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_loader.html">io_loader module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_plots.html">io_plots module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">mfg_stats module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.CostHelper"><code class="docutils literal notranslate"><span class="pre">CostHelper</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.Aij"><code class="docutils literal notranslate"><span class="pre">CostHelper.Aij</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.Aij_df"><code class="docutils literal notranslate"><span class="pre">CostHelper.Aij_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.Tij"><code class="docutils literal notranslate"><span class="pre">CostHelper.Tij</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.Tij_df"><code class="docutils literal notranslate"><span class="pre">CostHelper.Tij_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.c"><code class="docutils literal notranslate"><span class="pre">CostHelper.c</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.c_from"><code class="docutils literal notranslate"><span class="pre">CostHelper.c_from</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.c_to"><code class="docutils literal notranslate"><span class="pre">CostHelper.c_to</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.r"><code class="docutils literal notranslate"><span class="pre">CostHelper.r</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.renorm"><code class="docutils literal notranslate"><span class="pre">CostHelper.renorm</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.vi"><code class="docutils literal notranslate"><span class="pre">CostHelper.vi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.CostHelper.vj"><code class="docutils literal notranslate"><span class="pre">CostHelper.vj</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.DataSet"><code class="docutils literal notranslate"><span class="pre">DataSet</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.DataSet.from_to"><code class="docutils literal notranslate"><span class="pre">DataSet.from_to</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.DataSet.phi_point"><code class="docutils literal notranslate"><span class="pre">DataSet.phi_point</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.DataSet.roll"><code class="docutils literal notranslate"><span class="pre">DataSet.roll</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.DataSet.shift"><code class="docutils literal notranslate"><span class="pre">DataSet.shift</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.MFGStatContainer"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.daily_exports_imports"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.daily_exports_imports</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.dataset"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.dataset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.regression_df"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.regression_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.same_B_df"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.same_B_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.renamed_df"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.renamed_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.stats"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.stats</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.all_distances_df"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.all_distances_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.regression_and_distances_df"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.regression_and_distances_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.all_distances_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.concat_distances"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.concat_distances()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.daily_exports_imports</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.dataset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.prepare_dataset"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.prepare_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mfg_stats.MFGStatContainer.regress_and_postprocess"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.regress_and_postprocess()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.regression_and_distances_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.regression_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.renamed_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.same_B_df</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">MFGStatContainer.stats</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.create_cost_helper"><code class="docutils literal notranslate"><span class="pre">create_cost_helper()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.df_regression_col"><code class="docutils literal notranslate"><span class="pre">df_regression_col()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.extract_results"><code class="docutils literal notranslate"><span class="pre">extract_results()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.get_all_distance"><code class="docutils literal notranslate"><span class="pre">get_all_distance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.mark_same_country"><code class="docutils literal notranslate"><span class="pre">mark_same_country()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.panel_of_regressions"><code class="docutils literal notranslate"><span class="pre">panel_of_regressions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.prepare_data"><code class="docutils literal notranslate"><span class="pre">prepare_data()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.slice_of"><code class="docutils literal notranslate"><span class="pre">slice_of()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mfg_stats.total_cost"><code class="docutils literal notranslate"><span class="pre">total_cost()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">A Mean Field Game of Shipping</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">mfg_stats module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/mfg_stats.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-mfg_stats">
+<span id="mfg-stats-module"></span><h1>mfg_stats module<a class="headerlink" href="#module-mfg_stats" title="Link to this heading"></a></h1>
+<p>Maritime Trade Flow Statistics and Regression Analysis for Mean Field Game (MFG) modelling</p>
+<p>This module provides tools for analyzing maritime trade flow data using statistical
+regression models. It focuses on modeling trade flows between countries using
+phi-point indicators and geographical distances.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CostHelper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_to</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Aij_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Aij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tij_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Tij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renorm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.CostHelper" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.Aij">
+<span class="sig-name descname"><span class="pre">Aij</span></span><a class="headerlink" href="#mfg_stats.CostHelper.Aij" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.Aij_df">
+<span class="sig-name descname"><span class="pre">Aij_df</span></span><a class="headerlink" href="#mfg_stats.CostHelper.Aij_df" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.Tij">
+<span class="sig-name descname"><span class="pre">Tij</span></span><a class="headerlink" href="#mfg_stats.CostHelper.Tij" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.Tij_df">
+<span class="sig-name descname"><span class="pre">Tij_df</span></span><a class="headerlink" href="#mfg_stats.CostHelper.Tij_df" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.c">
+<span class="sig-name descname"><span class="pre">c</span></span><a class="headerlink" href="#mfg_stats.CostHelper.c" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 6</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.c_from">
+<span class="sig-name descname"><span class="pre">c_from</span></span><a class="headerlink" href="#mfg_stats.CostHelper.c_from" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.c_to">
+<span class="sig-name descname"><span class="pre">c_to</span></span><a class="headerlink" href="#mfg_stats.CostHelper.c_to" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.r">
+<span class="sig-name descname"><span class="pre">r</span></span><a class="headerlink" href="#mfg_stats.CostHelper.r" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 7</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.renorm">
+<span class="sig-name descname"><span class="pre">renorm</span></span><a class="headerlink" href="#mfg_stats.CostHelper.renorm" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 10</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.vi">
+<span class="sig-name descname"><span class="pre">vi</span></span><a class="headerlink" href="#mfg_stats.CostHelper.vi" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 9</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.CostHelper.vj">
+<span class="sig-name descname"><span class="pre">vj</span></span><a class="headerlink" href="#mfg_stats.CostHelper.vj" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 8</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mfg_stats.DataSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_to</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_point</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.DataSet" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.DataSet.from_to">
+<span class="sig-name descname"><span class="pre">from_to</span></span><a class="headerlink" href="#mfg_stats.DataSet.from_to" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.DataSet.phi_point">
+<span class="sig-name descname"><span class="pre">phi_point</span></span><a class="headerlink" href="#mfg_stats.DataSet.phi_point" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.DataSet.roll">
+<span class="sig-name descname"><span class="pre">roll</span></span><a class="headerlink" href="#mfg_stats.DataSet.roll" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.DataSet.shift">
+<span class="sig-name descname"><span class="pre">shift</span></span><a class="headerlink" href="#mfg_stats.DataSet.shift" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MFGStatContainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">daily_exports_imports_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.MFGStatContainer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Maritime Flow Gravity Statistics Container.</p>
+<p>This class provides a complete workflow for analyzing maritime trade flows
+using gravity-model-inspired regression techniques. It handles data preparation,
+regression analysis, and integration with geographical distance data.</p>
+<p>The workflow follows these steps:
+1. Load and prepare trade flow data
+2. Run panel regressions for all country pairs
+3. Post-process results to identify same-country effects
+4. Integrate with geographical distance data</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.daily_exports_imports">
+<span class="sig-name descname"><span class="pre">daily_exports_imports</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.daily_exports_imports" title="Link to this definition"></a></dt>
+<dd><p>Raw daily trade flow data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.dataset">
+<span class="sig-name descname"><span class="pre">dataset</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.dataset" title="Link to this definition"></a></dt>
+<dd><p>Processed dataset with phi-point indicators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mfg_stats.DataSet" title="mfg_stats.DataSet">DataSet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.regression_df">
+<span class="sig-name descname"><span class="pre">regression_df</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.regression_df" title="Link to this definition"></a></dt>
+<dd><p>Raw regression results for all country pairs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.same_B_df">
+<span class="sig-name descname"><span class="pre">same_B_df</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.same_B_df" title="Link to this definition"></a></dt>
+<dd><p>Simplified same-country coefficient results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.renamed_df">
+<span class="sig-name descname"><span class="pre">renamed_df</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.renamed_df" title="Link to this definition"></a></dt>
+<dd><p>Restructured regression results with MultiIndex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.stats">
+<span class="sig-name descname"><span class="pre">stats</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.stats" title="Link to this definition"></a></dt>
+<dd><p>Summary statistics from the regression analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.all_distances_df">
+<span class="sig-name descname"><span class="pre">all_distances_df</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.all_distances_df" title="Link to this definition"></a></dt>
+<dd><p>Bidirectional distance data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.regression_and_distances_df">
+<span class="sig-name descname"><span class="pre">regression_and_distances_df</span></span><a class="headerlink" href="#mfg_stats.MFGStatContainer.regression_and_distances_df" title="Link to this definition"></a></dt>
+<dd><p>Merged regression and distance data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">container</span> <span class="o">=</span> <span class="n">MFGStatContainer</span><span class="p">(</span><span class="s1">&#39;trade_data.pkl&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">prepare_dataset</span><span class="p">(</span><span class="n">shift</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">regress_and_postprocess</span><span class="p">(</span><span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2020-12-31&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">container</span><span class="o">.</span><span class="n">concat_distances</span><span class="p">(</span><span class="s1">&#39;distances.csv&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average same-country effect: </span><span class="si">{</span><span class="n">container</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="s1">&#39;avg_B&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">all_distances_df</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.concat_distances">
+<span class="sig-name descname"><span class="pre">concat_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distances_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.MFGStatContainer.concat_distances" title="Link to this definition"></a></dt>
+<dd><p>Integrate geographical distance data with regression results.</p>
+<p>This method merges the regression results with geographical distance
+information to enable gravity-model analysis incorporating spatial effects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>distances_df</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em>) – Either a filepath to a CSV
+containing distance data or a pandas DataFrame. The data should
+have columns ‘c1’ and ‘c2’ for country pairs and distance information.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Merged dataset containing both regression results</dt><dd><p>and geographical distances for analysis.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The distance data is automatically made bidirectional (c1-&gt;c2 and c2-&gt;c1)
+before merging with regression results.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">daily_exports_imports</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">dataset</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.prepare_dataset">
+<span class="sig-name descname"><span class="pre">prepare_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">drop_others</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Others'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.MFGStatContainer.prepare_dataset" title="Link to this definition"></a></dt>
+<dd><p>Prepare the dataset for regression analysis.</p>
+<p>This method processes the raw trade flow data to create phi-point indicators
+and applies temporal transformations for statistical analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>drop_others</strong> (<em>str</em><em>, </em><em>optional</em>) – Category to exclude from phi-point calculations.
+Defaults to ‘Others’.</p></li>
+<li><p><strong>shift</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of periods to shift phi-point data.
+Negative values create lags. Defaults to -30.</p></li>
+<li><p><strong>roll</strong> (<em>int</em><em>, </em><em>optional</em>) – Rolling window size for smoothing. Defaults to 11.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Prepared dataset containing processed trade flows and phi-points.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mfg_stats.DataSet" title="mfg_stats.DataSet">DataSet</a></p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The shift parameter is automatically negated to create proper lags.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mfg_stats.MFGStatContainer.regress_and_postprocess">
+<span class="sig-name descname"><span class="pre">regress_and_postprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2018-06-01'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2021-02-01'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.MFGStatContainer.regress_and_postprocess" title="Link to this definition"></a></dt>
+<dd><p>Run regression analysis and post-process results.</p>
+<p>This method performs comprehensive regression analysis for all country pairs
+and extracts same-country effects for further analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_from</strong> (<em>str</em><em>, </em><em>optional</em>) – Start date for regression period.
+Defaults to ‘2018-06-01’.</p></li>
+<li><p><strong>date_to</strong> (<em>str</em><em>, </em><em>optional</em>) – End date for regression period.
+Defaults to ‘2021-02-01’.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to print progress information.
+Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Restructured regression results with MultiIndex columns.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This method populates several attributes including regression_df,
+same_B_df, renamed_df, and stats. The stats dictionary contains
+summary statistics about the regression results.</p>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">regression_and_distances_df</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">regression_df</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">renamed_df</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">same_B_df</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">stats</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.create_cost_helper">
+<span class="sig-name descname"><span class="pre">create_cost_helper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regression_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renorm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.create_cost_helper" title="Link to this definition"></a></dt>
+<dd><p>Creates a CostHelper object from regression data for optimization.</p>
+<p>Processes regression data containing country-to-country relationships and
+creates a CostHelper object with normalized coefficient matrices and
+parameter transformation functions for use in cost optimization algorithms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regression_df</strong> (<em>pd.DataFrame</em>) – Regression data containing columns:
+‘country_from’, ‘country_to’, ‘const’, and ‘distKM_num’.
+Should contain bilateral relationships between countries.</p></li>
+<li><p><strong>renorm</strong> (<em>int</em><em>, </em><em>optional</em>) – Normalization factor to scale the coefficient
+matrices. Defaults to 10,000. Used to improve numerical stability
+during optimization.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A configured CostHelper object containing:</dt><dd><ul class="simple">
+<li><p>c_from: Index of origin countries</p></li>
+<li><p>c_to: Index of destination countries</p></li>
+<li><p>Aij_df/Aij: Normalized constant coefficient matrix (DataFrame/array)</p></li>
+<li><p>Tij_df/Tij: Normalized distance coefficient matrix (DataFrame/array)</p></li>
+<li><p>c, r, vj, vi: Lambda functions for parameter transformations</p></li>
+<li><p>renorm: The normalization factor used</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mfg_stats.CostHelper" title="mfg_stats.CostHelper">CostHelper</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>AssertionError</strong> – If the column or index names/orders of the pivoted
+    matrices Aij and Tij do not match.</p></li>
+<li><p><strong>KeyError</strong> – If required columns are missing from regression_df.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.df_regression_col">
+<span class="sig-name descname"><span class="pre">df_regression_col</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.df_regression_col" title="Link to this definition"></a></dt>
+<dd><p>Perform OLS regression for a specific source-destination country pair.</p>
+<p>This function runs an OLS regression to model trade flows from country i to
+country j using phi-point indicators as explanatory variables. The dependent
+variable is the smoothed trade flow, and independent variables are lagged
+phi-point values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>str</em>) – Source (exporting) country name.</p></li>
+<li><p><strong>j</strong> (<em>str</em>) – Destination (importing) country name.</p></li>
+<li><p><strong>keep_all</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, uses all countries’ phi-points as
+regressors. If False, uses only destination country j’s phi-point.
+Defaults to True.</p></li>
+<li><p><strong>dataset</strong> (<a class="reference internal" href="#mfg_stats.DataSet" title="mfg_stats.DataSet"><em>DataSet</em></a><em>, </em><em>optional</em>) – Dataset containing trade flow and phi-point data.
+Must be provided for the regression to run.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, prints warning messages when country
+pairs are not found. Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl>
+<dt>Dictionary containing regression results with keys:</dt><dd><ul class="simple">
+<li><p>’country_from’: Source country name</p></li>
+<li><p>’country_to’: Destination country name</p></li>
+<li><p>’const’: Regression constant (if fitted)</p></li>
+<li><p>’phi_point_{country}’: Coefficient for each country’s phi-point</p></li>
+<li><p>’residuals’: Root mean squared error of the model</p></li>
+</ul>
+<p>If the country pair is not found, returns only country names.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">df_regression_col</span><span class="p">(</span><span class="s1">&#39;Australia&#39;</span><span class="p">,</span> <span class="s1">&#39;China&#39;</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="n">my_dataset</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefficient for China: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phi_point_China&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model RMSE: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;residuals&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function applies rolling mean smoothing to the dependent variable
+and automatically adds a constant term to the regression.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.extract_results">
+<span class="sig-name descname"><span class="pre">extract_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chelp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.extract_results" title="Link to this definition"></a></dt>
+<dd><p>Extracts and formats optimization results into a readable dictionary.</p>
+<p>Takes the raw optimization result and parameter vector, then uses the
+CostHelper’s transformation functions to decode the parameters into
+their meaningful economic components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x0</strong> (<em>np.ndarray</em>) – Parameter vector containing the optimized values.
+Should have the structure expected by the CostHelper’s lambda
+functions (c, r, vj, vi parameters).</p></li>
+<li><p><strong>result</strong> – Optimization result object containing the final loss value
+in the ‘fun’ attribute (typically from scipy.optimize).</p></li>
+<li><p><strong>chelp</strong> (<a class="reference internal" href="#mfg_stats.CostHelper" title="mfg_stats.CostHelper"><em>CostHelper</em></a>) – CostHelper object containing the parameter
+transformation functions and data matrices.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dictionary containing extracted results with keys:</dt><dd><ul class="simple">
+<li><p>’loss’ (float): Final optimization loss value</p></li>
+<li><p>’c’ (float): Decoded cost parameter (scalar)</p></li>
+<li><p>’r’ (np.ndarray): Decoded r parameters (1D array)</p></li>
+<li><p>’vj’ (np.ndarray): Decoded vj parameters (1D array)</p></li>
+<li><p>’vi’ (np.ndarray): Decoded vi parameters (1D array)</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.get_all_distance">
+<span class="sig-name descname"><span class="pre">get_all_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distances_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.get_all_distance" title="Link to this definition"></a></dt>
+<dd><p>Create bidirectional distance matrix from unidirectional distance data.</p>
+<p>This function takes distance data that may be unidirectional and creates
+a complete bidirectional distance matrix by adding reverse country pair
+combinations with the same distances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>distances_df</strong> (<em>str</em><em> or </em><em>pandas.DataFrame</em>) – Either a filepath to a CSV file
+or a pandas DataFrame containing distance data. Should have columns
+‘c1’ and ‘c2’ representing country pairs.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Bidirectional distance DataFrame where both c1-&gt;c2</dt><dd><p>and c2-&gt;c1 relationships are included with identical distance values.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Geographic distance is typically symmetric, so this function ensures
+both directions are available for merging with trade flow data.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.mark_same_country">
+<span class="sig-name descname"><span class="pre">mark_same_country</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regression_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'country_to'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_other_pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'phi_point_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['country_from',</span> <span class="pre">'country_to']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.mark_same_country" title="Link to this definition"></a></dt>
+<dd><p>Mark and extract regression coefficients for same-country relationships.</p>
+<p>This function processes regression results to identify and extract coefficients
+where the destination country matches the phi-point variable country. This is
+useful for analyzing how a country’s own import patterns affect specific
+trade flows.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>regression_df</strong> (<em>pandas.DataFrame</em>) – DataFrame containing regression results
+with country pairs and phi-point coefficients.</p></li>
+<li><p><strong>column_ref</strong> (<em>str</em><em>, </em><em>optional</em>) – Column name containing the reference country
+(typically destination country). Defaults to ‘country_to’.</p></li>
+<li><p><strong>column_other_pattern</strong> (<em>str</em><em>, </em><em>optional</em>) – Pattern prefix for phi-point coefficient
+columns. Defaults to ‘<a href="#id8"><span class="problematic" id="id9">phi_point_</span></a>’.</p></li>
+<li><p><strong>keep_cols</strong> (<em>list</em><em>, </em><em>optional</em>) – List of columns to preserve in the output.
+Defaults to [‘country_from’, ‘country_to’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Two DataFrames:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>same_B_df: Simplified DataFrame with same-country coefficients</dt><dd><p>extracted into a single column named ‘same_B_as_{column_ref}’</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>renamed_reg_df: Restructured DataFrame with MultiIndex columns</dt><dd><p>separating coefficient values (‘B’) and country indicators (‘dest’)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function creates boolean indicators for destination countries and
+extracts coefficients where the phi-point country matches the destination.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.panel_of_regressions">
+<span class="sig-name descname"><span class="pre">panel_of_regressions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_from</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2016-06-01'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'2020-02-01'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_all</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.panel_of_regressions" title="Link to this definition"></a></dt>
+<dd><p>Run regression analysis for all country pairs in the dataset.</p>
+<p>This function performs a comprehensive regression analysis by running OLS
+regressions for every possible source-destination country combination in
+the dataset, excluding the ‘Others’ category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<a class="reference internal" href="#mfg_stats.DataSet" title="mfg_stats.DataSet"><em>DataSet</em></a>) – Dataset containing trade flow and phi-point data.</p></li>
+<li><p><strong>date_from</strong> (<em>str</em><em>, </em><em>optional</em>) – Start date for regression period in YYYY-MM-DD format.
+Defaults to ‘2016-06-01’.</p></li>
+<li><p><strong>date_to</strong> (<em>str</em><em>, </em><em>optional</em>) – End date for regression period in YYYY-MM-DD format.
+Defaults to ‘2020-02-01’.</p></li>
+<li><p><strong>keep_all</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, uses all countries’ phi-points as
+regressors in each model. If False, uses only destination-specific
+phi-points. Defaults to True.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, prints progress information and warnings.
+Defaults to True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>DataFrame containing regression results for all country pairs.</dt><dd><p>Each row represents one source-destination pair with columns for:
+- country_from, country_to: Country pair identifiers
+- const: Regression constant
+- phi_point_{country}: Coefficients for each phi-point variable
+- residuals: Model root mean squared error</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function automatically excludes ‘Others’ category from both source
+and destination countries to focus on specific country relationships.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.prepare_data">
+<span class="sig-name descname"><span class="pre">prepare_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">daily_exports_imports_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_others</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Others'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roll</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.prepare_data" title="Link to this definition"></a></dt>
+<dd><p>Prepare trade flow data for statistical analysis.</p>
+<p>This function processes daily trade flow data by creating phi-point indicators
+through grouping, shifting, and rolling mean calculations. The phi-point represents
+aggregated import volumes by destination country.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>daily_exports_imports_df</strong> (<em>pandas.DataFrame</em>) – Raw trade flow data with MultiIndex
+columns where level 0 is source countries and level 1 is destination countries.</p></li>
+<li><p><strong>drop_others</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the category to drop from phi-point
+calculations, typically representing aggregated “other” countries.
+If None, no categories are dropped. Defaults to ‘Others’.</p></li>
+<li><p><strong>shift</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of periods to shift the phi-point data.
+Negative values shift backwards in time. Defaults to -30.</p></li>
+<li><p><strong>roll</strong> (<em>int</em><em>, </em><em>optional</em>) – Window size for rolling mean calculation.
+Defaults to 11.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Named tuple containing:</dt><dd><ul class="simple">
+<li><p>from_to: Original trade flow data</p></li>
+<li><p>phi_point: Processed phi-point indicators (shifted and smoothed)</p></li>
+<li><p>shift: Applied shift value</p></li>
+<li><p>roll: Applied rolling window size</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mfg_stats.DataSet" title="mfg_stats.DataSet">DataSet</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.slice_of">
+<span class="sig-name descname"><span class="pre">slice_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date_to</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.slice_of" title="Link to this definition"></a></dt>
+<dd><p>Extract a time slice from a DataSet.</p>
+<p>Creates a new DataSet containing data only for the specified date range,
+while preserving the original shift and roll parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ds</strong> (<a class="reference internal" href="#mfg_stats.DataSet" title="mfg_stats.DataSet"><em>DataSet</em></a>) – Original dataset to slice.</p></li>
+<li><p><strong>date_from</strong> (<em>str</em>) – Start date for the slice in YYYY-MM-DD format.</p></li>
+<li><p><strong>date_to</strong> (<em>str</em>) – End date for the slice in YYYY-MM-DD format.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>New dataset containing only data from the specified period,</dt><dd><p>with original shift and roll parameters preserved.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mfg_stats.DataSet" title="mfg_stats.DataSet">DataSet</a></p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">full_dataset</span> <span class="o">=</span> <span class="n">prepare_data</span><span class="p">(</span><span class="n">trade_data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">training_data</span> <span class="o">=</span> <span class="n">slice_of</span><span class="p">(</span><span class="n">full_dataset</span><span class="p">,</span> <span class="s1">&#39;2018-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2020-12-31&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">training_data</span><span class="o">.</span><span class="n">from_to</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>  <span class="c1"># 2018-01-01</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mfg_stats.total_cost">
+<span class="sig-name descname"><span class="pre">total_cost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chelp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mfg_stats.total_cost" title="Link to this definition"></a></dt>
+<dd><p>Computes the total cost function for optimization.</p>
+<p>Calculates the root mean square error between the theoretical model
+prediction (Aij * (r + c * Tij)) and the target values (vj - vi).
+This function serves as the objective function for optimization algorithms.</p>
+<p>The cost function implements the model:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>predicted = Aij * (r + c * Tij)</p></li>
+<li><p>target = vj - vi</p></li>
+<li><p>loss = sqrt(mean((predicted - target)^2))</p></li>
+</ul>
+</div></blockquote>
+<p>This is a normalized version of this criterion:</p>
+<div class="math notranslate nohighlight">
+\[\min_{c, \{r_j\}, \{v_i\}} \sum_{i \ne j} \left\| A_{ij} \cdot \left( r_j + c \cdot T_{ij} \right) - \left( v_j - v_i \right) \right\|^2\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – Parameter vector containing optimization variables.
+The vector is decoded by the CostHelper’s transformation functions
+into economic parameters c, r, vj, and vi.</p></li>
+<li><p><strong>chelp</strong> (<a class="reference internal" href="#mfg_stats.CostHelper" title="mfg_stats.CostHelper"><em>CostHelper</em></a><em>, </em><em>optional</em>) – CostHelper object containing the data
+matrices (Aij, Tij) and parameter transformation functions.
+Defaults to None, but must be provided for the function to work.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Root mean square error between model predictions and targets.</dt><dd><p>Lower values indicate better fit to the theoretical model.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="io_plots.html" class="btn btn-neutral float-left" title="io_plots module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Charles-Albert Lehalle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

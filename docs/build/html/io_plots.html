@@ -1,0 +1,212 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>io_plots module &mdash; A Mean Field Game of Shipping  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mfg_stats module" href="mfg_stats.html" />
+    <link rel="prev" title="io_loader module" href="io_loader.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            A Mean Field Game of Shipping
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="io_config.html">io_config module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_loader.html">io_loader module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">io_plots module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#io_plots.plot_sankey"><code class="docutils literal notranslate"><span class="pre">plot_sankey()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#io_plots.save_fig"><code class="docutils literal notranslate"><span class="pre">save_fig()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mfg_stats.html">mfg_stats module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">A Mean Field Game of Shipping</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">io_plots module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/io_plots.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-io_plots">
+<span id="io-plots-module"></span><h1>io_plots module<a class="headerlink" href="#module-io_plots" title="Link to this heading"></a></h1>
+<p>Import/Exports Visualization Module</p>
+<p>This module provides several functionality for visualization of
+maritime trade flows.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="io_plots.plot_sankey">
+<span class="sig-name descname"><span class="pre">plot_sankey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">day_exports_all_trunc_OO_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Flux</span> <span class="pre">Sankey</span> <span class="pre">exportateurs</span> <span class="pre">→</span> <span class="pre">importateurs</span> <span class="pre">(Coal)'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#io_plots.plot_sankey" title="Link to this definition"></a></dt>
+<dd><p>Create a Sankey diagram for maritime trade flow visualization.</p>
+<p>This function generates an interactive Sankey diagram showing trade flows
+between exporting countries (sources) and importing countries (targets).
+The diagram visualizes the volume of trade flows, with flow thickness
+proportional to trade volume.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>day_exports_all_trunc_OO_df</strong> (<em>pandas.DataFrame</em>) – Trade flow matrix where:
+- Rows represent exporting countries (sources)
+- Columns represent importing countries (targets)
+- Values represent trade volumes (e.g., tonnes of coal)
+- Zero values are filtered out from the visualization</p></li>
+<li><p><strong>title</strong> (<em>str</em><em>, </em><em>optional</em>) – Title for the Sankey diagram.
+Defaults to “Flux Sankey exportateurs → importateurs (Coal)”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Interactive Plotly figure object containing</dt><dd><p>the Sankey diagram. Can be further customized or saved.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Only positive trade flow values are included in the diagram</p></li>
+<li><p>The function automatically displays the figure using fig.show()</p></li>
+<li><p>Node labels are derived from DataFrame index (exporters) and
+columns (importers)</p></li>
+<li><p>Link thickness is proportional to trade volume values</p></li>
+</ul>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assume we have a trade matrix</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">trade_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;China&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;India&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;Japan&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Australia&#39;</span><span class="p">,</span> <span class="s1">&#39;Indonesia&#39;</span><span class="p">,</span> <span class="s1">&#39;Russia&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_sankey</span><span class="p">(</span><span class="n">trade_matrix</span><span class="p">,</span> <span class="s2">&quot;Coal Trade Flows 2023&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Figure is displayed and returned for further use</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="io_plots.save_fig">
+<span class="sig-name descname"><span class="pre">save_fig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('.pdf',</span> <span class="pre">'.png')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#io_plots.save_fig" title="Link to this definition"></a></dt>
+<dd><p>Save current matplotlib figure to multiple file formats.</p>
+<p>This function saves the current matplotlib figure to one or more file formats
+in the specified directory. It includes protection against accidentally
+overwriting existing files unless explicitly forced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_dir</strong> (<em>str</em>) – Directory path where the image files will be saved.
+Should include trailing slash if not part of img_name.</p></li>
+<li><p><strong>img_name</strong> (<em>str</em>) – Base name for the image file without extension.
+The function will append each extension from exts to create
+the full filename.</p></li>
+<li><p><strong>exts</strong> (<em>tuple</em><em> of </em><em>str</em><em>, </em><em>optional</em>) – File extensions to save the figure in.
+Each extension should include the leading dot (e.g., ‘.pdf’, ‘.png’).
+Defaults to (‘.pdf’, ‘.png’).</p></li>
+<li><p><strong>force</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, overwrites existing files without
+prompting. If False, checks for existing files and skips saving
+if the first format already exists. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Only checks for existence of the first file format in exts tuple</p></li>
+<li><p>If the first format exists and force=False, no files are saved</p></li>
+<li><p>Uses matplotlib’s current active figure for saving</p></li>
+<li><p>Directory must exist before calling this function</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="io_loader.html" class="btn btn-neutral float-left" title="io_loader module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mfg_stats.html" class="btn btn-neutral float-right" title="mfg_stats module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Charles-Albert Lehalle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

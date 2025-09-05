@@ -1,0 +1,48 @@
+inputs:
+  ports:
+    input_positions_file: './data_in/input_positions_ports.csv'
+    input_distances_file: './data_in/out.geojson'
+  flows:
+    export_coal: './data_in/shipfix/export_coal'
+    import_coal: './data_in/shipfix/import_coal'
+    eval_countries_export: "{
+    'Indonesia': 'all_voyage_orders_by_cargo_type_time_series_stacked_Indonesia_to',
+    'Australia': 'all_voyage_orders_by_cargo_type_time_series_stacked_Australia_to',
+    'SAFR': 'all_voyage_orders_by_cargo_type_time_series_stacked_SAFR_to',
+    'US': 'all_voyage_orders_by_cargo_type_time_series_stacked_US_to',
+    'Russia': 'all_voyage_orders_by_cargo_type_time_series_stacked_Russia_to'}"
+    eval_countries_import: "{
+    'India': 'all_voyage_orders_by_cargo_type_time_series_stacked_to_India',
+    'China': 'all_voyage_orders_by_cargo_type_time_series_stacked_to_China',
+    'Vietnam': 'all_voyage_orders_by_cargo_type_time_series_stacked_to_Vietnam',
+    'Japan': 'all_voyage_orders_by_cargo_type_time_series_stacked_to_Japan',
+    'South Korea': 'all_voyage_orders_by_cargo_type_time_series_stacked_to_SK'}"
+    
+outputs:
+  ports:
+    intermediate:
+      comb1_file: './data_out/all_combinations_of_ports_positions.csv'
+      comb2_file: './data_out/all_combinations_of_ports_positions_nocountry.csv'
+    final:
+      output_distances_countries_file: './data_out/distances_countries.csv'
+  timeseries:
+    save_concatenated_and_truncated_ts_in: "./data_out/all_from_to.pkl"
+  regression:
+    coef_and_distances: "./data_out/coef_and_distances.pkl"
+  temp_minimize: "./data_out/memoize_min"
+
+config:
+  image_dir: './images/'
+  image_world_ports: './images/world_ports'
+  image_distrib_distances: './images/distrib_distances'
+  best_params:
+      shift: 30
+      roll: 10
+      year_start: 2017
+      year_end: 2020
+  best_avg_params:
+      shift: 60
+      roll: 20
+      year_start: 2018
+      year_end: 2021
+      
